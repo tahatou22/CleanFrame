@@ -3,7 +3,7 @@
   'use strict';
   var IDS = {
     stremio: 'IkWsFHtOY9.Stremio', netflix: 'org.tizen.netflix-app',
-    disneyplus: 'MCmYXNxgcu.DisneyPlus', youtube: '9Ur5IzDKqV.TizenYouTube',
+    disneyplus: 'MCmYXNxgcu.DisneyPlus', youtube: 'xvvl3S1TT1.TizenTubeStandalone',
     appletv: 'com.samsung.tv.aria-video', primevideo: 'org.tizen.primevideo',
     abciview: 'mWK87Xghap.ABCiview', sbs: 'OyE7OuxlUi.SBSOnDemand',
     applemusic: 'org.tizen.apple.apple-music'
@@ -16,6 +16,9 @@
     'KaLitts8bq.tenplaySamsungTizen', 'eYuOiOLYQX.KayoSports', 'Ne2ZsPWdKl.9NOW',
     '3KA0pm7a7V.TubiTV', 'rJeHak5zRg.Spotify', 'icp4AvUPiA.7plus'];
   var CONSUMER_SYSTEM = ['org.tizen.browser', 'com.microsoft.copilot'];
+  // Redirect the stock ad-serving YouTube to the ad-free TizenTube build, whatever
+  // a saved tile points at (the stock app cannot be uninstalled on this TV).
+  var ALIASES = { '9Ur5IzDKqV.TizenYouTube': 'xvvl3S1TT1.TizenTubeStandalone' };
   var EXTRA_BRANDS = {'rJeHak5zRg.Spotify': 'spotify', '5b8c3eb16b.BeamCTVDev': 'hbomax', 'cj37Ni3qXM.HBONow': 'hbomax', '3KA0pm7a7V.TubiTV': 'tubi'};
   var INTERNAL = ['adplatform.ADPlayer', 'WykOS4t4F0.cmsWebApp', '25emanual3.emanual',
     'd0m1lV1nt2.emanual', '2022ePop01.SmartTV',
@@ -38,6 +41,7 @@
     return finish;
   }
   function launchApp(id, done) {
+    id = ALIASES[id] || id;
     if (!api()) { unavailable(done); return; }
     var finish = bounded(done);
     try { api().launch(id, function () { finish(null); }, function (err) { finish(failure(err)); }); }

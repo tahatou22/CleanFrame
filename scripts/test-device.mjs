@@ -57,7 +57,7 @@ test('regional streaming apps stay distinct and system helpers stay hidden', () 
   h.device.apps((error, value) => { assert.equal(error, null); apps = value; });
   h.requests[0].ok([
     { id: 'Owner12345.Home', name: 'My Home', show: true },
-    { id: '9Ur5IzDKqV.TizenYouTube', name: 'YouTube', show: false },
+    { id: 'xvvl3S1TT1.TizenTubeStandalone', name: 'YouTube', show: false },
     { id: 'PvWgqxV3Xa.YouTubeTV', name: 'YouTube TV', show: false },
     { id: 'cj37Ni3qXM.HBONow', name: 'HBO Max', show: false },
     { id: '2022ePop01.SmartTV', name: 'Smart TV', show: true },
